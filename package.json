@@ -1,0 +1,12 @@
+{
+  "name": "platzi-media-playes",
+  "version": "1.0.0",
+  "description": "Desarrollo del curso de JavaScript Profesional",
+  "license": "MIT",
+  "author": "ec4m <ec.angaritas@gmail.com>",
+  "keywords": [
+    "platzi"
+  ],
+  "scripts": {},
+  "devDependencies": {}
+}
