@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clousers</title>
+</head>
+<body>
+    <a href="/ejercicios/index.html">Go back</a>
+    <h2>Clousers</h2>
+    <p>Abre la consola</p>
+
+    <script>
+        // let color = 'green';
+
+        // function printColor() {
+        //     console.log(color);
+        // }
+
+        // printColor();
+
+        //IIFE <- Expresión funcional que se invoca inmediatamente
+
+        // (function() {
+        //     let color = 'green';
+
+        //     function printColor() {
+        //         console.log(color);
+        //     }
+
+        //     printColor();
+        // })();
+
+        //Funciones que regresan funciones, definición de clousers
+        function makeColorPrinter(clr) {
+            let colorMessages = `The color is: ${clr}`;
+
+            return () => {
+                // console.log(colorMessages);
+            };
+        }
+        const greenColorPrinter = makeColorPrinter('green'); //Memoriza el scope con el que fue declarado, por ello tiene la varaible de colorMessages definica dentro al momento de almacenar la función en greenColorPrinter
+        console.log(greenColorPrinter());
+
+        //Variables privadas
+        var counter = {
+            count: 3
+        };
+        // console.log(counter.count);
+        //Para que nadie tenga acceso al valor de ese objeto hago:
+        function createCounter(n) {
+            let counter = n;
+            
+            return {
+                increase: function() {},
+                decrearse: function() {},
+                getCount: function() {
+                    return counter;
+                },
+            };
+        }
+
+        let counter2 = createCounter(7);
+        console.log(counter2.getCount());
+
+    </script>
+</body>
+</html>
