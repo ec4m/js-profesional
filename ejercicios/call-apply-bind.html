@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metodos call - apply - bind</title>
+</head>
+<body>
+  <h2>Trabajaremos con los metodos call - apply - bind</h2>
+  <a href="./index.html">Go back</a>
+  <ul>
+    <li><button class="call-to-action">Aprender</button></li>
+    <li><button class="call-to-action">Aprender mas</button></li>
+    <li><button class="call-to-action">Nunca pares de aprender!</button></li>
+  </ul>
+  <script>
+    //Establecer this usando call
+    function saludar() {
+      console.log(`Mi nombre es ${this.name}`);      
+    }
+
+    const Elian = {
+      name: 'Elian',
+      lastname: 'Angarita'
+    };
+    //las funciones call - apply - bind vienen preestablecidas en cualquier función.
+    saludar.call(Elian); //call se esta asignando a la función el valor de this. O el objeto con el que this va a trabajar.
+    //El prumer valor que le paso a la función .call() es el valor el this.
+
+    //Establecer this usando call y pasando argymentos a la función.
+    function caminar(metros, direccion) {
+      console.log(`${this.name} camina ${metros} metros hacia ${direccion}.`);
+    }
+    caminar.call(Elian, 100, 'Norte'); //El primer valor es el this con el que va a trabajar, el resto son los parametros de la función en orden.
+
+    //Establecer this usando apply y pasando argumentos a la función.
+    const datos = [500, 'sur'];
+    caminar.apply(Elian, datos); //Los parametros se pasan por medio de un array.
+
+    //Establecer this en una nueva función con bind.
+    const yeusy = {
+      name: 'Yeusy',
+      lastname: 'Navarro',
+    };
+    const yeusySaluda = saludar.bind(yeusy);
+    yeusySaluda();
+
+    const yeusyCamina = caminar.bind(yeusy, 100, 'Noreste');
+    yeusyCamina();
+
+    const yeusyWalk = caminar.bind(yeusy);
+    yeusyWalk(300, 'su casa');
+
+
+    //cuando es util utilizar uno de estos metodo
+    const buttons = document.getElementsByClassName('call-to-action');
+    console.log(buttons)
+    // buttons.forEach(button => {
+    //   button.onclick = () => {
+    //     alert('Nunca pares de aprender!');
+    //   } 
+    // };
+    //Esto anterio no funciona porque buttons es un 
+    //nodeList <- parecido a un array pero no cuenta con los mismos metodos. No cuenta con .forEach()
+
+    //Voy a modificar el metodo forEach() de la clase Array por medio del protopyte, para poder asignarle un valor
+    //para this por medio del metodo call() que sera el nodeList de buttons.
+    //Ademas voy a pasarle el parametro que corresponde a la ejecución del forEach, que es la función para asignar la función del onclick
+    Array.prototype.forEach.call(buttons, button => {
+      button.onclick = () => {
+        alert('Nunca pares de aprender');
+      }
+    })
+
+  </script>
+</body>
+</html>

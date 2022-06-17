@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This</title>
+</head>
+<body>
+  <h2>Trabajaremos con this</h2>
+  <a href="./index.html">Go back</a>
+  <h3>this se refiere a un objeto.</h3>
+  <p>Este objeto es el que actualmente esta ejecutando un pedazo de codigo.</p>
+  <script>
+    //TODO: this en el global scope
+    console.log(this); //El navegador lo va a asignar como un objeto y este el es objeto window.
+
+    //TODO: this en el scope de una función.
+    function whoIsThis() {
+      return this;
+    }
+    console.log(`In the functions this is: ${whoIsThis()}`); //De esta forma this tambien es asignado al objeto window, esto parasa ya que no 
+    //Se esta usando ningun otro metodo, pero existe una excepción y es usando el strict mode
+
+    //TODO: this en el scope de una función en strict mode
+    function whoIsThisStrict() {
+      "use strict"; // <- De esta manera se activa el strict mode
+      return this;
+    } //como el strict mode esta dentro, solo se aplicara para esta función.
+    console.log(`In the functions this with Strict mode is: ${whoIsThisStrict()}`); 
+    //Obtenemos un undefined <- Esto es lo que hace "Strict mode" en ves de devolver error el navegador intenta ayudar mandando valores indefinidos que son mas faciles de resolver que directamente un error.
+
+    //TODO: this en el contexto de un objeto
+    const person = {
+      name: 'Elian',
+      saludar: function() {
+        console.log(`Mi nombre es ${this.name}`);
+      },
+    }
+    person.saludar();
+    //this es un objeto que inicialmente empieza vacio y que almecena los valores en el objeto que se esta ejecutando actualmente
+    //En otras palabras, es un objeto que contiene el contexto de ejecución del objeto del pedazo de codigo ejecutado.
+    // TODO: this cuando sacamos a una función de un objeto.
+    const accion = person.saludar;
+    accion(); // Fuera del objeto no tengo acceso al contexto de ejecución con el que fue creado, y mas en este caso
+    //Que accion es de instancia del METODO saludar que pertenece al objeto person, no tiene ningun acceso al this del objeto.
+
+    //TODO: this en el contexto de una clase
+    function Person(name) {
+      //this = {} <- this es originalmente un objeto vacio.
+      this.name = name;
+    }
+    //Puedo asignar metodos a una clase por medio del objeto prototype.
+    Person.prototype.saludar = function() {
+      console.log(`Me llamo ${this.name}`);
+    }
+
+    const yeusy = new Person('Yeusy');
+    yeusy.saludar();
+    console.log(yeusy.name);
+    //puedo acceder a los valores del contexto de ejecución por medio de this y usarlos tendro de los metodos, incluso los metodos que creo por medio de prototype.
+
+
+
+  </script>
+</body>
+</html>

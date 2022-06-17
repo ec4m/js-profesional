@@ -34,7 +34,7 @@ header {
 }
 .vinculos {
     display: flex;
-    width: 300px;
+    width: 900px;
     justify-content: space-between;
     margin-right: 24px;
 }
